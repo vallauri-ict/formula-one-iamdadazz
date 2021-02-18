@@ -1,8 +1,12 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
+using System.Text;
 using System.Data.SqlClient;
 using System.Threading;
+using FormulaOneDLL;
 
 
 namespace FormulaOneConsole
@@ -12,29 +16,33 @@ namespace FormulaOneConsole
         /// <summary>
         
         /// </summary>
-        public const string WORKINGPATH = @"C:\data\FormulaOne\"; 
+        public const string WORKINGPATH = @"C:\data\FormulaOne\";  
         public const string CONNECTION_STRING = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + WORKINGPATH + @"FormulaOne.mdf;Integrated Security =True";
-        private static string DB_NAME = @"C:\Users\dariu\Desktop\formula-one-davideldarius\data";
         private static string DB_PATH = System.Environment.CurrentDirectory;
         public static string[] sql = { "drivers.sql", "teams.sql", "countries.sql", "circuits.sql", "races.sql" };
         public static string[] database = { "Driver", "Team", "Country", "Circuit", "Race" };
+        public static Tools tool = new Tools(CONNECTION_STRING);
 
         static void Main(string[] args)
         {
-           Console.WriteLine("************** - FORMULA ONE - *************");
+           Console.WriteLine("*** FORMULA ONE - BATCH OPERATIONS ***");
             char scelta;
             do
             {
-                Console.WriteLine("\n-------F1-------\n");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("\n*** FORMULA ONE  BATCH SCRIPTS ***\n");
                 Console.WriteLine("1 -  Create Countries");
                 Console.WriteLine("2 -  Create Teams");
                 Console.WriteLine("3 -  Create Drivers");
                 Console.WriteLine("4 -  Create Circuits");
                 Console.WriteLine("5 -  Create Races");
+                Console.WriteLine("6 -  Create Constraints");
+                Console.WriteLine("7 -  Delete Constraints");
                 Console.WriteLine("----------------------------------");
                 Console.WriteLine("R -  RESET DB");
+                Console.WriteLine("D -  DROP TABLE");
                 Console.WriteLine("B -  BACKUP");
-                Console.WriteLine("S - SHOW TABLE");
+                Console.WriteLine("S -  SHOW TABLE");
                 Console.WriteLine("----------------------------------");
                 Console.WriteLine("X -  EXIT\n");
                 scelta = Console.ReadKey(true).KeyChar;
@@ -43,31 +51,42 @@ namespace FormulaOneConsole
                     case '1':
                         {
                             wait();
-                            ExecuteSqlScripts("countries.sql");
+                            tool.ExecuteSqlScripts("countries.sql",WORKINGPATH);
                             break;
                         }
                     case '2':
                         {
                             wait();
-                            ExecuteSqlScripts("teams.sql");
+                            tool.ExecuteSqlScripts("teams.sql",WORKINGPATH);
                             break;
                         }
                     case '3':
                         {
                             wait();
-                            ExecuteSqlScripts("drivers.sql");
+                            tool.ExecuteSqlScripts("drivers.sql",WORKINGPATH);
                             break;
                         }
                     case '4':
                         {
                             wait();
-                            ExecuteSqlScripts("circuits.sql");
+                            tool.ExecuteSqlScripts("circuits.sql",WORKINGPATH);
                             break;
                         }
                     case '5':
                         {
                             wait();
-                            ExecuteSqlScripts("races.sql");
+                            tool.ExecuteSqlScripts("races.sql",WORKINGPATH);
+                            break;
+                        }
+                    case '6':
+                        {
+                            wait();
+                            tool.ExecuteSqlScripts("SetConstraints.sql",WORKINGPATH);
+                            break;
+                        }
+                    case '7':
+                        {
+                            wait();
                             break;
                         }
                     case 'R':
@@ -77,11 +96,28 @@ namespace FormulaOneConsole
                             ResetDB();
                             break;
                         }
+                    case 'D':
+                    case 'd':
+                        {
+                            wait();
+                            //Ricavare tutte le tabelle che ho nel database 
+                            List<string> tables = new List<string>();
+                            tables = tool.GetTables();
+                            foreach(var table in tables)
+                            {
+                                Console.WriteLine("--> "+ table );
+                            }
+                            Console.Write("\n");
+                            Console.WriteLine("Choose one table to drop: ");
+                            string table_chosen = Console.ReadLine().ToString();  
+                            tool.ExecuteDropTable(table_chosen+".sql");
+                            break;
+                        }
                     case 'B':
                     case 'b':
                         {
-                            wait(); 
-                            Backup();
+                            wait();
+                            tool.Backup(WORKINGPATH);
                             break;
                         }
                     case 'S':
@@ -92,7 +128,7 @@ namespace FormulaOneConsole
                             break;
                         }
                     default:
-                        if (scelta != 'x' && scelta != 'X') Console.WriteLine("\nScelta sbagliata, seleziona un numero valido");
+                        if (scelta != 'x' && scelta != 'X') Console.WriteLine("\nUncorrect Choice - Try Again");
                         break;
                 }
 
@@ -104,21 +140,56 @@ namespace FormulaOneConsole
         private static void ShowTable()
         {
             string key;
-            Console.Write("Scegli una tabella : ");
+            Console.Write("Choose a table : ");
             for(int i= 0 ;i<database.Length;i++)
             {
                 Console.Write(" ["+database[i]+"] ");
             }
-            Console.Write(" [ALL]");
+            Console.Write("[ALL]");
 
-            key = Console.ReadKey(true).ToString();
+            key = Console.ReadLine().ToString();
             if(key.ToUpper()!="ALL")
             {
                 //esegui query(mostra tabella selezionata).
+
+                DataTable dataTable = new DataTable();
+                dataTable = tool.GetDataTable(key);
+                foreach(DataRow datarow in dataTable.Rows)
+                {
+                    Console.WriteLine("_____________________________________________________________________________________________");
+                    foreach(var item in datarow.ItemArray)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.Write(item);
+                        Console.Write(" | ");
+                    }
+                    Console.Write("\n");
+                }
             }
             else
             {
                 //esegui query(mostra tutte le tabelle presenti nel database).
+                List<string> tables = new List<string>();
+                tables = tool.GetTables();
+                foreach(var table in tables)
+                {
+                    DataTable datatable = new DataTable();
+                    datatable = tool.GetDataTable(table);
+                    Console.WriteLine("==========="+table+ "===========");
+                    foreach(DataRow datarow in datatable.Rows)
+                    {
+                        Console.WriteLine("________________________________________________________________________________________");
+                        foreach(var item in datarow.ItemArray)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.Write(item);
+                            Console.Write(" | ");
+                        }
+                        Console.Write("\n");
+                    }
+
+                }
+
             }
             
         } 
@@ -129,56 +200,16 @@ namespace FormulaOneConsole
             //DROP TABLE FUNCTION
             for (int i = 0; i < database.Length; i++)
             {
-                ExecuteDropTable(database[i]);
+                tool.ExecuteDropTable(database[i]);
             }
             //RECREATE TABLE FUNCTION
             for (int i = 0; i < sql.Length; i++)
             {
-                ExecuteSqlScripts(sql[i]);
+                tool.ExecuteSqlScripts(sql[i],WORKINGPATH);
             }
-            Console.WriteLine("\nDatabase resettato corretamente\n\n");
-        }
-
-        private static void Backup()
-        {
-            try
-            {
-                using (SqlConnection dbConn = new SqlConnection())
-                {
-                    dbConn.ConnectionString = CONNECTION_STRING;
-                    dbConn.Open();
-
-                    using (SqlCommand multiuser_rollback_dbcomm = new SqlCommand())
-                    {
-                        multiuser_rollback_dbcomm.Connection = dbConn;
-                        multiuser_rollback_dbcomm.CommandText = @"ALTER DATABASE [" + DB_NAME + "] SET MULTI_USER WITH ROLLBACK IMMEDIATE";
-
-                        multiuser_rollback_dbcomm.ExecuteNonQuery();
-                    }
-                    dbConn.Close();
-                }
-
-                SqlConnection.ClearAllPools();
-
-                using (SqlConnection backupConn = new SqlConnection())
-                {
-                    backupConn.ConnectionString = CONNECTION_STRING;
-                    backupConn.Open();
-
-                    using (SqlCommand backupcomm = new SqlCommand())
-                    {
-                        backupcomm.Connection = backupConn;
-                        backupcomm.CommandText = @"BACKUP DATABASE [" + DB_NAME + "] TO DISK='" + DB_PATH + @"\prova.bak'";
-                        backupcomm.ExecuteNonQuery();
-                    }
-                    backupConn.Close();
-                }
-            }
-
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            wait();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\nRESET DB OK\n\n");
         }
 
 
@@ -186,61 +217,12 @@ namespace FormulaOneConsole
         {
             for (int i = 0; i < 5; i++)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write(".");
                 Thread.Sleep(500);
             }
-           Console.Write("\n");
+            Console.Write("\n");
         }
-        private static void ExecuteDropTable(string sqlScriptName)
-        {
-            SqlConnection con = new SqlConnection(CONNECTION_STRING);
-            SqlCommand cmd = new SqlCommand("DROP TABLE IF EXISTS " + sqlScriptName+";", con);
-            try
-            {
-                con.Open();
-                cmd.ExecuteNonQuery();
-                Console.WriteLine("Table "+ sqlScriptName +" is Dropped ");
-            }
-            catch (SqlException ex)
-            {
-                Console.WriteLine("ERROR : " + ex.Message + " -->" + ex.Errors);
-            }
-            con.Close();
-        }
-
-       
-
-        static void ExecuteSqlScripts(string sqlScriptName)
-        {
-            var fileContent = File.ReadAllText(WORKINGPATH + sqlScriptName);
-            fileContent = fileContent.Replace("\r\n", "");
-            fileContent = fileContent.Replace("\t", "");
-            fileContent = fileContent.Replace("\n", "");
-            fileContent = fileContent.Replace("\r", "");
-            var sqlqueries = fileContent.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
-
-            var con = new SqlConnection(CONNECTION_STRING);
-            var cmd = new SqlCommand("query", con);
-            con.Open(); 
-            int i = 0; int nerr = 0;
-            foreach(var query in sqlqueries)
-            {
-                cmd.CommandText = query; i++;
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                catch (SqlException err)
-                {
-                    Console.WriteLine("Errore is in the query number "+ i + "\n");
-                    Console.WriteLine("Error during Execution : Message"+ err.Message);
-                    nerr++;
-                }
-            }
-            if (nerr == 0)
-            {
-                Console.WriteLine("Script " + sqlScriptName + " Executed Without Errors");
-            }
-        }
+   
     }
 }

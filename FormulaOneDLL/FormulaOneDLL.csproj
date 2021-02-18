@@ -41,6 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Circuit.cs" />
+    <Compile Include="Country.cs" />
+    <Compile Include="Driver.cs" />
+    <Compile Include="Races.cs" />
+    <Compile Include="Team.cs" />
     <Compile Include="Tools.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
