@@ -7,7 +7,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{20AF779E-3747-4B34-B619-8A9010F71518}</ProjectGuid>
+    <ProjectGuid>{571C656B-0E11-49E4-B8AD-2390CF6B8AB2}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -67,9 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Default.aspx">
-      <BrowseToURL>Default.aspx</BrowseToURL>
-    </Content>
+    <Content Include="Default.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -93,7 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FormulaOneDLL\FormulaOneDLL.csproj">
-      <Project>{44372788-6916-415e-a303-e32dfb82b989}</Project>
+      <Project>{78e92961-5aa8-4f32-9aed-0948aa01a369}</Project>
       <Name>FormulaOneDLL</Name>
     </ProjectReference>
   </ItemGroup>
@@ -110,9 +108,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>50579</DevelopmentServerPort>
+          <DevelopmentServerPort>53260</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:62220/</IISUrl>
+          <IISUrl>http://localhost:53260/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

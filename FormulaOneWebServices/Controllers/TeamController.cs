@@ -6,51 +6,43 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using FormulaOneDLL;
 
-namespace FormulaOneWebServices.Controllers
+namespace FormulaOneWebServices
 {
-    [Route("api/Team")]
+    [Route("api/team")]
     [ApiController]
-    public class TeamController : ControllerBase
+    public class teamController : ControllerBase
     {
-        // GET: api/Team
+        // GET: api/team
         [HttpGet]
         public IEnumerable<Team> Get()
         {
-            Tools tool = new Tools();
-            return tool.GetTeamsObject();
+            DbTools db = new DbTools();
+            return db.GetTeamsObj();
         }
 
-        // GET: api/Team/5
-        [HttpGet("{team_id}", Name = "GetTeam_id")]
-        public List<Team> Get(string team_id)
+        // GET: api/team/id
+        [HttpGet("id/{id}")]
+        public Team Get(int id)
         {
-            Tools tool = new Tools();
-            return tool.GetTeam(team_id,"");
+            DbTools db = new DbTools();
+            return db.GetTeam(id);
         }
 
-        // GET: api/Team/Ferrari
-        [HttpGet("Team/{Team_name}")]
-        public List<Team> Get(string Team_name,int extra_param = -1) 
+        // GET: api/team/name/Mercedes-AMG Petronas F1 Team
+        [HttpGet("name/{name}")]
+        public Team Get(string name)
         {
-            Tools tool = new Tools();
-            return tool.GetTeam("",Team_name);
+            DbTools db = new DbTools();
+            return db.GetTeamName(name);
         }
 
-        // GET: api/Team/5/FERRARI
-        [HttpGet("{team_id}/{team_name}")]
-        public List<Team> Get(string team_id, string team_name)
-        {
-            Tools tool = new Tools();
-            return tool.GetTeam(team_id, team_name);
-        }
-
-        // POST: api/Team
+        // POST: api/team
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT: api/Team/5
+        // PUT: api/team/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {

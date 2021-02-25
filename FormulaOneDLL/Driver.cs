@@ -8,34 +8,28 @@ namespace FormulaOneDLL
 {
     public class Driver
     {
-        private int driverNumber;
-        private string driverName;
-        private string driverSurname;
-        private string teamCode;
-        private string countryCode;
-        private int winNumber;
-        private int worldChampionshipsNumber;
-        private string img;
-
-        public Driver(int driverNumber, string driverName, string driverSurname, string teamCode, string countryCode, int winNumber, int worldChampionshipsNumber, string img)
+        public Driver(int id, int number, string name, DateTime dob, byte[] helmetImage, byte[] image, int teamID, int podiums, string countryCode)
         {
-            this.DriverNumber = driverNumber;
-            this.DriverName = driverName;
-            this.DriverSurname = driverSurname;
-            this.TeamCode = teamCode;
-            this.CountryCode = countryCode;
-            this.WinNumber = winNumber;
-            this.WorldChampionshipsNumber = worldChampionshipsNumber;
-            this.Img = img;
+            this.id = id;
+            this.number = number;
+            this.name = name;
+            this.dob = dob;
+            this.helmetImage = helmetImage;
+            this.image = image;
+            this.teamID = teamID;
+            this.podiums = podiums;
+            this.countryCode = countryCode;
+
         }
 
-        public int DriverNumber { get => driverNumber; set => driverNumber = value; }
-        public string DriverName { get => driverName; set => driverName = value; }
-        public string DriverSurname { get => driverSurname; set => driverSurname = value; }
-        public string TeamCode { get => teamCode; set => teamCode = value; }
-        public string CountryCode { get => countryCode; set => countryCode = value; }
-        public int WinNumber { get => winNumber; set => winNumber = value; }
-        public int WorldChampionshipsNumber { get => worldChampionshipsNumber; set => worldChampionshipsNumber = value; }
-        public string Img { get => img; set => img = value; }
+        public int id { get; set; }
+        public int number { get; set; }
+        public string name { get; set; }
+        public DateTime dob { get; set; }
+        public byte[] helmetImage { get; set; }
+        public byte[] image { get; set; }
+        public int teamID { get; set; }
+        public int podiums { get; set; }
+        public string countryCode { get; set; }
     }
 }

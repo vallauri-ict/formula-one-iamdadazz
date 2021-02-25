@@ -8,41 +8,45 @@ using FormulaOneDLL;
 
 namespace FormulaOneWebServices
 {
-    [Route("api/Driver")]
+    [Route("api/driver")]
     [ApiController]
-    public class DriverController : ControllerBase
+    public class driverController : ControllerBase
     {
-        // GET: api/Driver
+        // GET: api/driver
         [HttpGet]
-        public IEnumerable<Driver> Get()
+        
+
+        //GET: api/driver/id/1
+        [HttpGet("id/{id}")]
+        public Driver Get(int id)
         {
-            Tools tool = new Tools();
-            return tool.GetDriversObject();
+            DbTools db = new DbTools();
+            return db.GetDriver(id);
         }
 
-        // GET: api/Driver/5
-        [HttpGet("{Driver_id}")]
-        public List<Driver> Get(int Driver_id)
+        //GET: api/driver/number/44
+        //[HttpGet("number/{number:int}")]
+        //public Driver Get(int number)
+        //{
+        //    DbTools db = new DbTools();
+        //    return db.GetDriverNumber(number);
+        //}
+
+        //GET: api/driver/name/Lewis Hamilton
+        [HttpGet("name/{name}")]
+        public Driver Get(string name)
         {
-            Tools tool = new Tools();
-            return tool.GetDriver(Driver_id,"");
+            DbTools db = new DbTools();
+            return db.GetDriverName(name);
         }
 
-        //GET:  api/Driver/COGNOME
-        [HttpGet("{Driver_Surname}")]
-        public List<Driver> Get(string Driver_Surname)
-        {
-            Tools tool = new Tools();
-            return tool.GetDriver(0,Driver_Surname);
-        }
-
-        // POST: api/Driver
+        // POST: api/driver
         [HttpPost]
         public void Post([FromBody] string value)
         {
-
         }
-        // PUT: api/Driver/5
+
+        // PUT: api/driver/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {

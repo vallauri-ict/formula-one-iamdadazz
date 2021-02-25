@@ -1,15 +1,18 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
 namespace FormulaOneDLL
 {
     public class Country
     {
-        public string IsoCode { get; set; }
-        public string Description { get; set; }
-
-        public Country(string isoCode, string description)
+        public Country(string isoCode, string decr)
         {
-            IsoCode = isoCode;
-            Description = description;
+            countryCode = isoCode;
+            countryName = decr;
         }
+        public string countryCode { get; set; }
+        public string countryName { get; set; }
     }
 }

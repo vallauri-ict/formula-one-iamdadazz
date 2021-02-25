@@ -1,23 +1,38 @@
-CREATE TABLE [dbo].[Team] (
-[teamCode] char(3) NOT NULL default '',
-[teamFullName] varchar(130) NOT NULL default '',
-[teamChief] varchar(100) NOT NULL default '',
-[teamPowerUnit] varchar(100) NOT NULL default '',
-[teamFirstEntryYear] int NOT NULL ,
-[teamHQPlace] varchar(70) NOT NULL default '',
-[nationCode] char(2) NOT NULL default '',
-[logo] varchar(512) NOT NULL ,
-[img] varchar(512) NOT NULL ,
-PRIMARY KEY ([teamCode])
+CREATE TABLE [dbo].[Teams]
+(
+	[id] INT NOT NULL PRIMARY KEY IDENTITY,
+    [name] VARCHAR(128) NOT NULL,
+    [fullTeamName] VARCHAR(128) NOT NULL,
+    [extCountry] CHAR(2) NOT NULL,
+    [powerUnit] VARCHAR(128) NOT NULL,
+    [technicalChief] VARCHAR(128) NOT NULL,
+	[chassis] VARCHAR(128) NOT NULL,
+	[extFirstDriver] INT NOT NULL,
+	[extSecondDriver] INT NOT NULL
 );
 
-INSERT INTO [Team] VALUES ('MER','Mercedes-AMG Petronas F1 Team','Toto Wolff','Mercedes',1970,'Brackley','GB','https://www.formula1.com/content/fom-website/en/teams/Mercedes/_jcr_content/logo.img.jpg/1582650443223.jpg','https://www.formula1.com/content/dam/fom-website/teams/2020/mercedes.png.transform/2col/image.png');
-INSERT INTO [Team] VALUES ('RBR','Aston Martin Red Bull Racing','Christian Horner','Honda',1997,'Milton Keynes','GB','https://www.formula1.com/content/fom-website/en/teams/Red-Bull-Racing/_jcr_content/logo.img.jpg/1582650443223.jpg','https://www.formula1.com/content/dam/fom-website/teams/2020/red-bull-racing.png.transform/2col/image.png');
-INSERT INTO [Team] VALUES ('FER','Scuderia Ferrari Mission Winnow','Mattia Binotto','Ferrari',1950,'Maranello','IT','https://www.formula1.com/content/fom-website/en/teams/Ferrari/_jcr_content/logo.img.jpg/1582650443223.jpg','https://www.formula1.com/content/dam/fom-website/teams/2020/ferrari.png.transform/2col/image.png');
-INSERT INTO [Team] VALUES ('MCL','McLaren F1 Team','Andreas Seidl','Renault',1966,'Woking','GB','https://www.formula1.com/content/fom-website/en/teams/Alfa-Romeo-Racing/_jcr_content/logo.img.jpg/1582650443223.jpg','https://www.formula1.com/content/dam/fom-website/teams/2020/alfa-romeo-racing.png.transform/2col/image.png');
-INSERT INTO [Team] VALUES ('RPT','BWT Racing Point F1 Team','Otmar Szafnauer','Mercedes',2019,'Silverstone','GB','https://www.formula1.com/content/fom-website/en/teams/Racing-Point/_jcr_content/logo.img.jpg/1582650443223.jpg','https://www.formula1.com/content/dam/fom-website/teams/2020/racing-point.png.transform/2col/image.png');
-INSERT INTO [Team] VALUES ('REN','Renault DP World F1 Team','Cyril Abiteboul','Renault',1986,'Enstone','GB','https://www.formula1.com/content/fom-website/en/teams/Renault/_jcr_content/logo.img.jpg/1582650443223.jpg','https://www.formula1.com/content/dam/fom-website/teams/2020/renault.png.transform/2col/image.png');
-INSERT INTO [Team] VALUES ('ATR','Scuderia Alpha Tauri','Franz Tost','Honda',2020,'Faenza','IT','https://www.formula1.com/content/fom-website/en/teams/AlphaTauri/_jcr_content/logo.img.jpg/1582650443223.jpg','https://www.formula1.com/content/dam/fom-website/teams/2020/alphatauri.png.transform/2col/image.png');
-INSERT INTO [Team] VALUES ('ARR','Alfa Romeo Racing ORLEAN','Frédéroc Vasseur','Ferrari',1993,'Hinwil','CH','https://www.formula1.com/content/fom-website/en/teams/Alfa-Romeo-Racing/_jcr_content/logo.img.jpg/1582650443223.jpg','https://www.formula1.com/content/dam/fom-website/teams/2020/alfa-romeo-racing.png.transform/2col/image.png');
-INSERT INTO [Team] VALUES ('HAS','Haas F1 Team','Guenther Steiner','Ferrari',2016,'Kannapolis','US','https://www.formula1.com/content/fom-website/en/teams/Haas-F1-Team/_jcr_content/logo.img.png/1568040720597.png','https://www.formula1.com/content/dam/fom-website/teams/2020/haas-f1-team.png.transform/2col/image.png');
-INSERT INTO [Team] VALUES ('WLR','Williams Racing','Simon Roberts','Mercedes',1978,'Grove','GB','https://www.formula1.com/content/fom-website/en/teams/Williams/_jcr_content/logo.img.jpg/1582650443223.jpg','https://www.formula1.com/content/dam/fom-website/teams/2020/williams.png.transform/2col/image.png');
+SET IDENTITY_INSERT [dbo].[Teams] ON;
+
+INSERT INTO [dbo].[Teams]
+(
+	id,
+	name,
+	fullTeamName,
+	extCountry,
+	powerUnit,
+	technicalChief,
+	chassis,
+	extFirstDriver,
+	extSecondDriver
+)
+VALUES
+(1,'Alfa Romeo', 'Alfa Romeo Racing', 'CH', 'Ferrari', 'Jan Monchaux', 'C38', 14, 16),
+(2,'Ferrari', 'Scuderia Ferrari Mission Winnow', 'IT', 'Ferrari', 'Mattia Binotto', 'SF90',3,5),
+(3,'Red Bull', 'Aston Martin Red Bull Racing', 'GB', 'Honda', 'Pierre WachÃ©', 'RB15',7,8),
+(4,'Haas', 'Haas F1 Team', 'US', 'Ferrari', 'Rob Taylor', 'VF-19', 18, 17),
+(5,'McLaren', 'McLaren F1 Team', 'GB', 'Renault', 'James Key', 'MCL34', 9, 10),
+(6,'Mercedes', 'Mercedes AMG Petronas Motorsport', 'GB', 'Mercedes', 'James Allison', 'W10',1,2),
+(7,'Toro Rosso', 'Red Bull Toro Rosso Honda', 'IT', 'Honda', 'Jody Eggington', 'STR14', 20, 4),
+(8,'Racing Point', 'SportPesa Racing Point F1 Team', 'GB', 'BWT Mercedes', 'Andrew Green', 'RP19', 12, 15),
+(9,'Williams', 'ROKiT Williams Racing', 'GB', 'Mercedes', 'TBC', 'FW42', 13, 19),
+(10,'Renault', 'Renault F1 Team', 'GB', 'Renault', 'Nick Chester', 'R.S.19',11,6);

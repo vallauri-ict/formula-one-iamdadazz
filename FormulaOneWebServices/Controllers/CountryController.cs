@@ -6,40 +6,35 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using FormulaOneDLL;
 
-
 namespace FormulaOneWebServices
 {
-    [Route("api/Country")]
+    [Route("api/country")]
     [ApiController]
-    public class CountryController : ControllerBase
+    public class countryController : ControllerBase
     {
-
-        // GET: api/Country
+        // GET: api/country
         [HttpGet]
         public IEnumerable<Country> Get()
         {
-            Tools db = new Tools();
-            return db.GetCountriesObject();
+            DbTools db = new DbTools();
+            return db.GetCountriesObj();
         }
 
-        // GET: api/Country/it
-        [HttpGet("{isoCode}", Name = "Get")]
-        public List<Country> Get(string isoCode)
+        // GET: api/country/it
+        [HttpGet("{isocode}")]
+        public Country Get(string isoCode)
         {
-            Tools db = new Tools();
+            DbTools db = new DbTools();
             return db.GetCountry(isoCode);
         }
 
- 
-
-        // POST: api/Country
+        // POST: api/country
         [HttpPost]
         public void Post([FromBody] string value)
         {
-
         }
 
-        // PUT: api/Country/5
+        // PUT: api/country/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {

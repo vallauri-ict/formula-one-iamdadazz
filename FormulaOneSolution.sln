@@ -3,22 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29411.108
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FormulaOneConsole", "FormulaOneConsole\FormulaOneConsole.csproj", "{E8385E23-927B-4A39-8573-BCCA5D9F3DF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FormulaOneConsole", "FormulaOneConsole\FormulaOneConsole.csproj", "{CD83646F-9689-485F-8AD2-BD4BF12E1B2E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E30A3AFD-AD05-4CAC-86F1-E144CAAC44A7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AA6F0E30-1F80-4F39-87C3-FF179694B24A}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormulaOneWebForm", "FormulaOneWebForm\FormulaOneWebForm.csproj", "{20AF779E-3747-4B34-B619-8A9010F71518}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormulaOneWebForm", "FormulaOneWebForm\FormulaOneWebForm.csproj", "{571C656B-0E11-49E4-B8AD-2390CF6B8AB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormulaOneDLL", "FormulaOneDLL\FormulaOneDLL.csproj", "{44372788-6916-415E-A303-E32DFB82B989}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormulaOneDLL", "FormulaOneDLL\FormulaOneDLL.csproj", "{78E92961-5AA8-4F32-9AED-0948AA01A369}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormulaOneWindowsForm", "FormulaOneWindowsForm\FormulaOneWindowsForm.csproj", "{E1BD173F-DEDD-4BA9-A9CE-7D9EDED89BB3}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FormulaOneWebApp", "FormulaOneWebApp\FormulaOneWebApp.csproj", "{637B709B-5AAD-4C72-B3A3-551EDB46C98B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormulaOneWebServices", "FormulaOneWebServices\FormulaOneWebServices.csproj", "{28F0954C-ED42-4A13-9B75-52C4B13C7428}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormulaOneWebServices", "FormulaOneWebServices\FormulaOneWebServices.csproj", "{20FAC1FB-622E-4AB7-9A94-63B944302A9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,35 +22,27 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E8385E23-927B-4A39-8573-BCCA5D9F3DF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E8385E23-927B-4A39-8573-BCCA5D9F3DF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E8385E23-927B-4A39-8573-BCCA5D9F3DF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E8385E23-927B-4A39-8573-BCCA5D9F3DF5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{20AF779E-3747-4B34-B619-8A9010F71518}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{20AF779E-3747-4B34-B619-8A9010F71518}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{20AF779E-3747-4B34-B619-8A9010F71518}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{20AF779E-3747-4B34-B619-8A9010F71518}.Release|Any CPU.Build.0 = Release|Any CPU
-		{44372788-6916-415E-A303-E32DFB82B989}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{44372788-6916-415E-A303-E32DFB82B989}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{44372788-6916-415E-A303-E32DFB82B989}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{44372788-6916-415E-A303-E32DFB82B989}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E1BD173F-DEDD-4BA9-A9CE-7D9EDED89BB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E1BD173F-DEDD-4BA9-A9CE-7D9EDED89BB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E1BD173F-DEDD-4BA9-A9CE-7D9EDED89BB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E1BD173F-DEDD-4BA9-A9CE-7D9EDED89BB3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{637B709B-5AAD-4C72-B3A3-551EDB46C98B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{637B709B-5AAD-4C72-B3A3-551EDB46C98B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{637B709B-5AAD-4C72-B3A3-551EDB46C98B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{637B709B-5AAD-4C72-B3A3-551EDB46C98B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{28F0954C-ED42-4A13-9B75-52C4B13C7428}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{28F0954C-ED42-4A13-9B75-52C4B13C7428}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{28F0954C-ED42-4A13-9B75-52C4B13C7428}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{28F0954C-ED42-4A13-9B75-52C4B13C7428}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD83646F-9689-485F-8AD2-BD4BF12E1B2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD83646F-9689-485F-8AD2-BD4BF12E1B2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD83646F-9689-485F-8AD2-BD4BF12E1B2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD83646F-9689-485F-8AD2-BD4BF12E1B2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{571C656B-0E11-49E4-B8AD-2390CF6B8AB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{571C656B-0E11-49E4-B8AD-2390CF6B8AB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{571C656B-0E11-49E4-B8AD-2390CF6B8AB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{571C656B-0E11-49E4-B8AD-2390CF6B8AB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78E92961-5AA8-4F32-9AED-0948AA01A369}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78E92961-5AA8-4F32-9AED-0948AA01A369}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78E92961-5AA8-4F32-9AED-0948AA01A369}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78E92961-5AA8-4F32-9AED-0948AA01A369}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20FAC1FB-622E-4AB7-9A94-63B944302A9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20FAC1FB-622E-4AB7-9A94-63B944302A9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20FAC1FB-622E-4AB7-9A94-63B944302A9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20FAC1FB-622E-4AB7-9A94-63B944302A9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {6834E4B5-72DC-4A8F-821F-04F6685E308D}
+		SolutionGuid = {A9C4AF02-E88E-41DC-8325-DEC5E85DF19D}
 	EndGlobalSection
 EndGlobal
