@@ -100,7 +100,7 @@ namespace FormulaOneDLL
                     {
                         while (reader.Read())
                         {
-                            int Id = Convert.ToInt32(reader.GetString(0));
+                            int Id =reader.GetInt32(0);
                             string name = reader.GetString(1);
                             string circuit_id = reader.GetString(2);
                             Console.WriteLine("{0} {1} {2}", Id, name, circuit_id);
@@ -214,7 +214,7 @@ namespace FormulaOneDLL
 
 
 
-        //restituisce un solo oggetto, in base all' id  richiesto
+        //restituisce un solo oggetto, in base all' id , o paramteri   richiesti
         public List<Country> GetCountry(string isoCode) 
         {
             List<Country> retVal = new List<Country>();
@@ -248,7 +248,7 @@ namespace FormulaOneDLL
                 dbConn.ConnectionString = CONNECTION_STRING;
                 Console.WriteLine("\n Query data example: ");
                 Console.WriteLine("========================================");
-                string sqlcommand = "SELECT * FROM Circuit WHERE circuit_code = '"+circuit_Id+"';";
+                string sqlcommand = "SELECT * FROM Circuit WHERE Circuit.circuit_code = '"+circuit_Id+"';";
                 using (SqlCommand command = new SqlCommand(sqlcommand, dbConn))
                 {
                     dbConn.Open();
@@ -283,7 +283,7 @@ namespace FormulaOneDLL
                 dbConn.ConnectionString = CONNECTION_STRING;
                 Console.WriteLine("\n Query data example: ");
                 Console.WriteLine("========================================");
-                string sqlcommand = "SELECT * FROM Race WHERE Id= "+Race_id+";";
+                string sqlcommand = "SELECT * FROM Race WHERE Race.Id= "+Race_id+";";
                 using (SqlCommand command = new SqlCommand(sqlcommand, dbConn))
                 {
                     dbConn.Open();
@@ -291,7 +291,7 @@ namespace FormulaOneDLL
                     {
                         while (reader.Read())
                         {
-                            int Id = Convert.ToInt32(reader.GetString(0));
+                            int Id = reader.GetInt32(0);
                             string name = reader.GetString(1);
                             string circuit_id = reader.GetString(2);
                             Console.WriteLine("{0} {1} {2}", Id, name, circuit_id);
@@ -302,7 +302,7 @@ namespace FormulaOneDLL
             }
             return retVal;
         }
-        public List<Driver> GetDriver(int Driver_id)
+        public List<Driver> GetDriver(int Driver_id,string surname)
         {
             List<Driver> retVal = new List<Driver>();
             using (SqlConnection dbConn = new SqlConnection())
@@ -310,7 +310,13 @@ namespace FormulaOneDLL
                 dbConn.ConnectionString = CONNECTION_STRING;
                 Console.WriteLine("\n Query data example: ");
                 Console.WriteLine("========================================");
-                string sqlcommand = "SELECT * FROM Driver WHERE driverNumber = "+Driver_id+";";
+                string sqlcommand = "";
+                if ((surname == "") && (Driver_id != 0))
+                    sqlcommand = "SELECT * FROM Driver WHERE Driver.driverNumber = " + Driver_id + ";";
+                else if ((surname != "") && (Driver_id == 0))
+                    sqlcommand = "SELECT * FROM Driver WHERE Driver.driverSurname = '" + surname + "';";
+                else
+                    sqlcommand = "SELECT * FROM Driver WHERE Driver.driverNumber = "+Driver_id+ " AND  Driver.driverSurname = '" + surname + "';";
                 using (SqlCommand command = new SqlCommand(sqlcommand, dbConn))
                 {
                     dbConn.Open();
@@ -334,7 +340,7 @@ namespace FormulaOneDLL
             }
             return retVal;
         }
-        public List<Team> GetTeam(string team_id)
+        public List<Team> GetTeam(string team_id,string team_name)
         {
             List<Team> retVal = new List<Team>();
             using (SqlConnection dbConn = new SqlConnection())
@@ -342,7 +348,15 @@ namespace FormulaOneDLL
                 dbConn.ConnectionString = CONNECTION_STRING;
                 Console.WriteLine("\n Query data example: ");
                 Console.WriteLine("========================================");
-                string sqlcommand = "SELECT * FROM Team WHERE ='"+team_id+"';";
+                string sqlcommand = "";
+
+                if((team_id != "")&&(team_name == ""))
+                    sqlcommand = "SELECT * FROM Team WHERE Team.teamCode  ='"+team_id+"';";
+                else if((team_id == "")&&(team_name !=""))
+                    sqlcommand = "SELECT * FROM Team WHERE Team.teamFullName  ='" + team_name + "';";
+                else
+                    sqlcommand = "SELECT * FROM Team WHERE Team.teamCode  ='" + team_id + "' AND Team.teamFullName = '" + team_name + "'; ";
+
                 using (SqlCommand command = new SqlCommand(sqlcommand, dbConn))
                 {
                     dbConn.Open();
@@ -367,6 +381,10 @@ namespace FormulaOneDLL
             }
             return retVal;
         }
+
+
+        //Restituisce un solo oggetto, in base ad un parametro,diverso dall'id, richiesto
+        
 
 
 

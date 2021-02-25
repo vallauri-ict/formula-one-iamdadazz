@@ -16,7 +16,7 @@ namespace FormulaOneConsole
         /// <summary>
         
         /// </summary>
-        public const string WORKINGPATH = @"C:\data\FormulaOne\";  
+        public const string WORKINGPATH = @"C:\data\FormulaOne\";  /// Creare una cartella su C:\data--> FormulaOne--> countries.sql
         public const string CONNECTION_STRING = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + WORKINGPATH + @"FormulaOne.mdf;Integrated Security =True";
         private static string DB_PATH = System.Environment.CurrentDirectory;
         public static string[] sql = { "drivers.sql", "teams.sql", "countries.sql", "circuits.sql", "races.sql" };
