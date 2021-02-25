@@ -30,7 +30,7 @@ namespace FormulaOneWebServices.Controllers
 
         // GET: api/Team/Ferrari
         [HttpGet("Team/{Team_name}")]
-        public List<Team> Get(string Team_name,int extra_param = -1) //extra_param serviva solo per poter distinguere dalla richiamata API precedente
+        public List<Team> Get(string Team_name,int extra_param = -1) 
         {
             Tools tool = new Tools();
             return tool.GetTeam("",Team_name);
